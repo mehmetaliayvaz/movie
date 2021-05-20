@@ -25,9 +25,6 @@ export default {
   computed:{
     ...mapGetters(['getMovies'])
   },
-  created(){
-    this.$store.dispatch('fetchMovies');
-  },
 
 }
 </script>

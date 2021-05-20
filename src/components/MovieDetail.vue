@@ -1,8 +1,17 @@
 <template>
-  <div class="MovieDetail" :style="{ backgroundImage: 'url(http://image.tmdb.org/t/p/original/' + getMovies[0].backdrop_path + ')' }">
-
-    <router-link to="/">Ana Sayfaya Dön</router-link>
-    <img src="https://forum.gamer.com.tr/attachments/into-the-night-cover-jpg.164164/" alt="">
+  <div class="MovieDetail" :style="{ background: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(http://image.tmdb.org/t/p/original' + movie.backdrop_path + ')' }">
+    <div class="container">
+      <router-link to="/">Ana Sayfaya Dön</router-link>
+      <div class="MovieDetail-title">
+        <h1>{{ movie.original_title }}</h1>
+      </div>
+      <div class="MovieDetail-vote">
+        <p>Ortalama Oy: {{ movie.vote_average }}</p>
+      </div>
+      <div class="MovieDetail-desc">
+        <p>{{ movie.overview }}</p>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -13,10 +22,22 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'MovieDetail',
+  data(){
+    return{
+      id : this.$route.params.id,
+      movie: null,
+    }
+  },
   computed:{
     ...mapGetters(['getMovies'])
+  },
+  created(){
+    this.getMovies.forEach(item => {
+      if(item.id == this.id){
+        this.movie = item;
+      }
+    });
   }
-
 
 }
 </script>
