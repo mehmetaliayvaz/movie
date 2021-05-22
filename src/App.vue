@@ -12,7 +12,6 @@ export default {
   created(){
     this.$store.dispatch('fetchMovies');
   },
-
 }
 </script>
 

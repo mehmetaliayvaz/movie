@@ -17,26 +17,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 
 export default {
   name: 'MovieDetail',
   data(){
     return{
       id : this.$route.params.id,
-      movie: null,
+      movie: {},
     }
   },
-  computed:{
-    ...mapGetters(['getMovies'])
-  },
   created(){
-    this.getMovies.forEach(item => {
-      if(item.id == this.id){
-        this.movie = item;
-      }
-    });
+    this.$store.dispatch('fetchMovie', this.id).then((data) => {
+      this.movie = data;
+    })
   }
 
 }
